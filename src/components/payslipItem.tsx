@@ -5,6 +5,7 @@ import { Payslip } from "../models/payslip";
 import { formatDate } from "../utils";
 
 const PayslipItem: FC<Payslip> = ({ id, fromDate, toDate }: Payslip) => {
+
   return (
     <IonCard
       button={true}

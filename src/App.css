@@ -17,3 +17,7 @@ ion-toolbar{
   --background: 'transparent' ;
   --min-height: 80px;
 }
+
+html{
+  --ion-safe-area-left: 25px;
+}

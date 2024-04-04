@@ -13,9 +13,10 @@ import React, { FC } from "react";
 export interface HeaderProps {
   title: string;
   isBackButton?: boolean;
+  buttonMethod?: ()=> void;
 }
 
-const Header: FC<HeaderProps> = ({ title, isBackButton = false }) => {
+const Header: FC<HeaderProps> = ({ title, isBackButton = false, buttonMethod}) => {
   return (
     <IonHeader translucent={true} className="ion-no-border">
       <IonToolbar className="flex bg-main">
@@ -25,8 +26,8 @@ const Header: FC<HeaderProps> = ({ title, isBackButton = false }) => {
           </IonButtons>
         )}
         <IonTitle>{title}</IonTitle>
-        <IonButtons slot="end">
-        <IonButton fill="outline"> <IonIcon icon={cloudDownloadSharp} /> </IonButton>
+        <IonButtons onClick={buttonMethod} slot="end">
+        <IonButton  fill="outline"> <IonIcon icon={cloudDownloadSharp} /> </IonButton>
         </IonButtons>
       </IonToolbar>
     </IonHeader>
