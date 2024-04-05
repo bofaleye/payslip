@@ -6,8 +6,11 @@ import { formatDate } from "../utils";
 
 export interface PayslipItemProps extends Payslip {}
 
-const PayslipItem: FC<PayslipItemProps> = ({ id, fromDate, toDate }: Payslip) => {
-
+const PayslipItem: FC<PayslipItemProps> = ({
+  id,
+  fromDate,
+  toDate,
+}: Payslip) => {
   return (
     <IonCard
       aria-label={`payslip ${id}`}

@@ -1,5 +1,13 @@
-export const formatDate =(dateString: string | Date): string => {
-    const date = new Date(dateString);
-    const options: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric', year: 'numeric' };
-    return date? date.toLocaleDateString('en-US', options) : "";
-}
+export const formatDate = (dateString: string | Date): string => {
+
+  if (!isNaN(Date.parse(dateString as string))) {
+    const options: Intl.DateTimeFormatOptions = {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    };
+    return new Date(dateString).toLocaleDateString("en-US", options);
+  } else {
+    return ""; 
+  }
+};

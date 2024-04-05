@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { useState } from "react";
-import {  Capacitor } from "@capacitor/core";
-import  { Directory, Filesystem } from "@capacitor/filesystem"
+import { Capacitor } from "@capacitor/core";
+import { Directory, Filesystem } from "@capacitor/filesystem";
 import { Share } from "@capacitor/share";
 
 interface DownloadFileHook {
@@ -13,12 +12,10 @@ const useDownloadFile = (): DownloadFileHook => {
   const [isDownloading, setIsDownloading] = useState<boolean>(false);
 
   const downloadFile = async (url: string, filename: string): Promise<void> => {
-     try {
+    try {
       setIsDownloading(true);
-        
 
       if (Capacitor.isNativePlatform()) {
-    
         const savedFile = await Filesystem.downloadFile({
           path: `${filename}.jpeg`,
           url,
@@ -31,18 +28,17 @@ const useDownloadFile = (): DownloadFileHook => {
           dialogTitle: "Share File",
         });
       } else {
-
         const downloadLink = document.createElement("a");
         downloadLink.href = url;
         downloadLink.setAttribute("download", filename);
         downloadLink.setAttribute("target", "_blank");
         downloadLink.click();
       }
-     } catch (error) {
+    } catch (error) {
       console.error("Error downloading file:", error);
-     } finally {
+    } finally {
       setIsDownloading(false);
-     }
+    }
   };
 
   return {

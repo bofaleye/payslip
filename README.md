@@ -55,9 +55,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 - More unit test coverage
 - Functional test using cypress
 - UI compatibility test on wide variety of devices.
+- Resolve dependency conflict between packages.
 - Improved accessibility for color contrast and voice readers
 - An improved web view for the  detail page.
 - Home page pagination and scroll to load more on mobile
 - Filter and search feature for payslips
-- Better SEO
-- A more robust model for payslip to include  information like 'Amount'
+- Husky and lint stage setup

@@ -7,7 +7,8 @@ const config = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
     "^.+\\.jsx?$": "babel-jest",
   },
-  transformIgnorePatterns: ['node_modules/(?!@ionic/react|@ionic)'],
+  transformIgnorePatterns: ['node_modules/(@ionic/react)'],
+
 };
 
 module.exports = config;
