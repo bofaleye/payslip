@@ -4,7 +4,9 @@ import { arrowForwardOutline, arrowRedo } from "ionicons/icons";
 import { Payslip } from "../models/payslip";
 import { formatDate } from "../utils";
 
-const PayslipItem: FC<Payslip> = ({ id, fromDate, toDate }: Payslip) => {
+export interface PayslipItemProps extends Payslip {}
+
+const PayslipItem: FC<PayslipItemProps> = ({ id, fromDate, toDate }: Payslip) => {
 
   return (
     <IonCard
