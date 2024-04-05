@@ -17,16 +17,13 @@ const useDownloadFile = (): DownloadFileHook => {
       setIsDownloading(true);
         
 
-      // Check if the device is mobile
       if (Capacitor.isNativePlatform()) {
-        console.log('started here')
+    
         const savedFile = await Filesystem.downloadFile({
           path: `${filename}.jpeg`,
           url,
           directory: Directory.Documents,
         });
-        // Share the file on mobile
-        console.log('got here', savedFile);
         await Share.share({
           title: "Downloaded payslip",
           text: "Payslip file",
@@ -38,6 +35,7 @@ const useDownloadFile = (): DownloadFileHook => {
         const downloadLink = document.createElement("a");
         downloadLink.href = url;
         downloadLink.setAttribute("download", filename);
+        downloadLink.setAttribute("target", "_blank");
         downloadLink.click();
       }
      } catch (error) {

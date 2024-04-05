@@ -8,6 +8,7 @@ const PayslipItem: FC<Payslip> = ({ id, fromDate, toDate }: Payslip) => {
 
   return (
     <IonCard
+      aria-label={`payslip ${id}`}
       button={true}
       routerLink={`/details/${id}`}
       className="card rounded-md p-[15px] m-0 h-[100px] w-[100%]"
