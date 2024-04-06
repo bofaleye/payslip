@@ -11,22 +11,47 @@ interface DownloadFileHook {
 const useDownloadFile = (): DownloadFileHook => {
   const [isDownloading, setIsDownloading] = useState<boolean>(false);
 
+  const getFilesystemAccess = async (): Promise<boolean> => {
+    try {
+      const status = await Filesystem.checkPermissions();
+      const state = status.publicStorage;
+
+      if (state === "granted") {
+        return true;
+      } else if (state === "denied") {
+        // You may want to redirect to the main app settings.
+        return false;
+      } else {
+        Filesystem.requestPermissions();
+        return false;
+      }
+    } catch (error) {
+      console.error("Error while checking filesystem permissions:", error);
+      return false;
+    }
+  };
+
   const downloadFile = async (url: string, filename: string): Promise<void> => {
     try {
       setIsDownloading(true);
 
       if (Capacitor.isNativePlatform()) {
-        const savedFile = await Filesystem.downloadFile({
-          path: `${filename}.jpeg`,
-          url,
-          directory: Directory.Documents,
-        });
-        await Share.share({
-          title: "Downloaded payslip",
-          text: "Payslip file",
-          url: savedFile?.path,
-          dialogTitle: "Share File",
-        });
+        const access = await getFilesystemAccess();
+        if (access) {
+          const savedFile = await Filesystem.downloadFile({
+            path: `${filename}.jpeg`,
+            url,
+            directory: Directory.External
+          });
+          await Share.share({
+            title: "Downloaded payslip",
+            text: "Payslip file",
+            url: `file://${savedFile?.path}`,
+            dialogTitle: "Share File",
+          });
+        } else {
+          console.log("go to settings");
+        }
       } else {
         const downloadLink = document.createElement("a");
         downloadLink.href = url;
